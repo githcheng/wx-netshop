@@ -15,7 +15,7 @@ export function wxPay(){
 
 export function proLst(id){
         switch(parseInt(id)){
-                case 80: return {
+                case 12: return {
                     title:'【佰露集】鲜嫩嫩蚕丝面膜（修护、舒缓、保湿）',
                     truePrice : '119.80',
                     specLst:[ 
@@ -31,7 +31,7 @@ export function proLst(id){
                         {url:`${rootUrl2}/images/upload/Image/鲜嫩嫩.jpg` }
                     ]
                     };     
-                case 81: return {
+                case 13: return {
                     title:'【佰露集】亮晶晶蚕丝面膜(白皙润颜、补水保湿)',
                     truePrice : '119.80',
                     specLst:[ 
@@ -47,7 +47,7 @@ export function proLst(id){
                         {url:`${rootUrl2}/images/upload/Image/亮晶晶.jpg` }
                     ]
                     };       
-                case 82: return {
+                case 14: return {
                     title:'【佰露集】水灵灵蚕丝面膜（水润保湿、净肤清透）',
                     truePrice : '119.80',
                     specLst:[ 
@@ -63,7 +63,7 @@ export function proLst(id){
                         {url:`${rootUrl2}/images/upload/Image/水灵灵(1).jpg` }
                     ]
                     };    
-                case 83: return {
+                case 9: return {
                     title:'【佰露集】薰衣草蚕丝面膜（补水控油、收缩毛孔）',
                     truePrice : '99.80',
                     specLst:[ 
@@ -79,7 +79,7 @@ export function proLst(id){
                         {url:`${rootUrl2}/images/upload/Image/薰衣.jpg` }
                     ]
                     };   
-                case 84: return {
+                case 10: return {
                     title:'【佰露集】玫瑰蚕丝面膜（补水保湿滋润、提亮）25ML*6片装',
                     truePrice : '99.80',
                     specLst:[ 
@@ -95,7 +95,7 @@ export function proLst(id){
                     ]
                     
                     };    
-                case 85: return {
+                case 11: return {
                     title:'【佰露集】蓝莓蚕丝面膜(补水抗氧化、清爽平衡）25ML*6片装',
                     truePrice : '99.80',
                     specLst:[ 

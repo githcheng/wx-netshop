@@ -14,7 +14,7 @@
     </view>
     <swiper indicator-dots="{{indicatorDots}}"  
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
-        <block wx:for="{{imgUrls}}" >  
+        <block wx:for="{{swiperImageUrls}}" >  
             <swiper-item class="center-image" >  
                 <image  src="{{item.url}}"  mode="widthFix" style="width:80%;"   />    
             </swiper-item>
@@ -41,7 +41,7 @@
         <view class="pro-all-info">
             <text>{{info}}</text>
         </view>
-        <image wx:for="{{infoImgs}}" src="{{item.url}}" style="width:100%;" mode="widthFix"></image>
+        <image wx:for="{{infoImageUrls}}" src="{{item.url}}" style="width:100%;" mode="widthFix"></image>
         <view style="height:128rpx;width:100%;">
         </view>
 </view>

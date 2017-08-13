@@ -1,8 +1,8 @@
-import {rootUrl,rootUrl2} from '../../utils/params';
+import {host} from '../../utils/params';
 import {proLst} from '../../utils/public';
 Page({
     data: {
-        imgUrls: [],
+        swiperImageUrls: [],
         truePrice:'',
         title:'',
         info:'',
@@ -12,7 +12,9 @@ Page({
         num:1,
         onePrice: '',
         morePrice:'',
-        infoImgs:[],
+        infoImageUrls:[],
+
+
         indicatorDots: true,
         vertical: false,
         autoplay: true,
@@ -20,7 +22,8 @@ Page({
         duration: 1000,
         
     },
-     onShareAppMessage() {
+    
+    onShareAppMessage() {
         return {
         title: this.data.title,
         desc: this.data.info,
@@ -45,19 +48,18 @@ Page({
          const num = this.data.num-1;
         this.howMorePri(num)
     },
-    goOrder(){
-        // http://www.360blj.com/mobile/api/dbCart_action.php?act=addToCart&goods_id=93
-        // wx.request({
-        //             url: `${rootUrl}/api/dbCart_action.php?act=addToCart&goods_id=${this.data.id}`,
-        //             method: 'GET',
-        //             data: {},
-        //             header: {
-        //                 'Accept': 'application/json'
-        //             },
-        //             success: (res)=> {
-        //                 console.log(res)
-        //             }
-        //         })
+    goOrder(){        
+        wx.request({
+                    url: `${rootUrl}/api/dbCart_action.php?act=addToCart&goods_id=${this.data.id}`,
+                    method: 'GET',
+                    data: {},
+                    header: {
+                        'Accept': 'application/json'
+                    },
+                    success: (res)=> {
+                        console.log(res)
+                    }
+                })
         wx.navigateTo({
           url: `/pages/orders/index?num=${this.data.num}&id=${this.data.id}&attr=${this.data.attr}&onePrice=${this.data.onePrice}&morePrice=${this.data.morePrice}`
         })
@@ -68,21 +70,27 @@ Page({
                 morePrice:num*this.data.onePrice
             });
     },
-    queryInfo({id=false,monParam,num=false,attr=false}={}){
-        const setDa = (money)=>{
-            const json = {};
-            json[monParam] = money
-            return json;
-        };
+    queryInfo(id){
         wx.request({
-                    url: `${rootUrl}/goods.php?act=price&id=${id?id:this.data.id}&attr=${attr?attr:this.data.attr}&number=${num?num:this.data.num}`,
-                    method: 'GET',
-                    data: {},
+                    url: `${host}/item/getItemById?id=${this.data.id}`,
+                    method: 'POST',
+                    data: {
+                        'id':this.data.id
+                    },
                     header: {
                         'Accept': 'application/json'
                     },
                     success:(res)=> {
-                        this.setData(setDa(res.data.result));
+                        console.log(res.data.data);
+                        this.setData({
+                            swiperImageUrls : res.data.data.swiperImageUrls,
+                            infoImageUrls : res.data.data.infoImageUrls,
+                            infoUrls : res.data.data.imgUrls,
+                            truePrice : res.data.data.truePrice,
+                            onePrice : res.data.data.onePrice,
+                            specLst : res.data.data.specLst,
+                            title :res.data.data.desc,
+                        });
                     }
                 })
     },
@@ -92,7 +100,7 @@ Page({
         })
         const params = proLst(options.id);
         this.setData(params) 
-        wx.setNavigationBarTitle({title: params.title}); //标题 
-       this.queryInfo({id:options.id,monParam:'onePrice',num:1,attr:254});
+        this.queryInfo(options.id);
+        wx.setNavigationBarTitle({title: this.data.title}); //标题 
     }
 })
